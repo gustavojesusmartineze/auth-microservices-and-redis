@@ -1,11 +1,17 @@
-const store = require('./../../../store/dummy');
-
 const TABLE = 'users';
 
-function list() {
-  return store.list(TABLE);
-}
+module.exports = function (injectedStore) {
+  let store = injectedStore;
 
-module.exports = {
-  list,
+  if (!store) {
+    store = require('./../../../store/dummy');
+  }
+
+  function list() {
+    return store.list(TABLE);
+  }
+
+  return {
+    list,
+  }
 }
