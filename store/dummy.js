@@ -14,7 +14,7 @@ function list(table) {
 function get(table, id) {
   const col = list(table);
 
-  return col.find((item) => item.id === id) || null;
+  return col.find((item) => item.id == id) || null;
 }
 
 function upsert(table, data) {
