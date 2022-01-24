@@ -1,12 +1,12 @@
 const express = require('express');
 
 const response = require('./../../../network/response');
-const Controller = require('./controller');
+const controller = require('./index');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  const data = Controller.list();
+  const data = controller.list();
   response.success(req, res, data, 200);
 });
 
