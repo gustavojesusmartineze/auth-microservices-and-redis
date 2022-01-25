@@ -5,16 +5,24 @@ const controller = require('./index');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  const data = controller.list();
-  response.success(req, res, data, 200);
+router.get('/', async (req, res) => {
+  try {
+    const data = await controller.list();
+    response.success(req, res, data, 200);
+  } catch (error) {
+    response.error(req, res, error.message, 500)
+  }
 });
 
-router.get('/:id', (req, res) => {
-  const { id } = req.params;
-  const user = controller.get(id);
+router.get('/:id', async (req, res) => {
+    try {
+    const { id } = req.params;
+    const user = await controller.get(id);
 
-  response.success(req, res, user, 200);
+    response.success(req, res, user, 200);
+  } catch (error) {
+    response.error(req, res, error.message, 500)
+  }
 });
 
 module.exports = router;
