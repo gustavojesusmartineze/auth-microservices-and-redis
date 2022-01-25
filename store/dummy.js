@@ -7,21 +7,21 @@ const db = {
   ]
 };
 
-function list(table) {
+async function list(table) {
   return db[table];
 }
 
-function get(table, id) {
-  const col = list(table);
+async function get(table, id) {
+  const col = await list(table);
 
   return col.find((item) => item.id == id) || null;
 }
 
-function upsert(table, data) {
+async function upsert(table, data) {
   db[table].push(data);
 }
 
-function remove(table, id) {
+async function remove(table, id) {
   return true;
 }
 
