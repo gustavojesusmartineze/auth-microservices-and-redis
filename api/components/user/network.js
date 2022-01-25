@@ -10,4 +10,11 @@ router.get('/', (req, res) => {
   response.success(req, res, data, 200);
 });
 
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+  const user = controller.get(id);
+
+  response.success(req, res, user, 200);
+});
+
 module.exports = router;
