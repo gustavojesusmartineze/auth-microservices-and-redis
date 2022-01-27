@@ -32,9 +32,20 @@ async function remove(table, id) {
   return true;
 }
 
+async function query(table, q) {
+  const col = await list(table);
+
+  // we are assuming that we only have 1 condition
+  const keys = Object.keys(q);
+  const key = keys[0];
+
+  return col.find((item) => item[key] == q[key]) || null;
+}
+
 module.exports = {
   list,
   get,
   upsert,
-  remove
+  remove,
+  query
 }
