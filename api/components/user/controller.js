@@ -28,7 +28,7 @@ module.exports = function (injectedStore) {
       user.id = nanoid();
     }
 
-    return store.upsert(TABLA, user);
+    return store.upsert(TABLE, user);
   }
 
   return {
