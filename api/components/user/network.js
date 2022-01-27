@@ -27,7 +27,7 @@ async function get(req, res) {
 
     response.success(req, res, user, 200);
   } catch (error) {
-    response.error(req, res, error.message, 500)
+    response.error(req, res, error.message, 500);
   }
 }
 
@@ -38,7 +38,7 @@ async function create(req, res) {
 
     response.success(req, res, user, 200);
   } catch (error) {
-    response.error(req, res, error.message, 500)
+    response.error(req, res, error.message, 500);
   }
 }
 
