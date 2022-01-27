@@ -1,3 +1,5 @@
+const { sign } = require('./../../../auth');
+
 const TABLE = 'auth';
 
 module.exports = function (injectedStore) {
@@ -15,7 +17,7 @@ module.exports = function (injectedStore) {
     }
 
     // Generate Token
-    return 'Token'
+    return sign(data);
   }
 
   function upsert(data) {
