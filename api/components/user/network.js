@@ -15,45 +15,45 @@ router.put('/:id',
   update
 );
 
-async function list (req, res) {
+async function list (req, res, next) {
   try {
     const data = await controller.list();
     response.success(req, res, data, 200);
   } catch (error) {
-    response.error(req, res, error.message, 500)
+    next();
   }
 }
 
-async function get(req, res) {
+async function get(req, res, next) {
     try {
     const { id } = req.params;
     const user = await controller.get(id);
 
     response.success(req, res, user, 200);
   } catch (error) {
-    response.error(req, res, error.message, 500);
+    next();
   }
 }
 
-async function create(req, res) {
+async function create(req, res, next) {
     try {
     const body  = req.body;
     const user = await controller.upsert(body);
 
     response.success(req, res, user, 200);
   } catch (error) {
-    response.error(req, res, error.message, 500);
+    next();
   }
 }
 
-async function update(req, res) {
+async function update(req, res, next) {
   try {
     const body  = req.body;
     const user = await controller.upsert(body);
 
     response.success(req, res, user, 200);
   } catch (error) {
-    response.error(req, res, error.message, 500);
+    next();
   }
 }
 
