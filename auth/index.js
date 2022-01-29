@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-
 const config = require('../config');
+const error = require('./../utils/error');
 
 function sign(data) {
   return jwt.sign(data, config.security.secret);
@@ -10,7 +10,7 @@ function verify(token) {
   try {
     return jwt.verify(token, config.security.secret);
   } catch (error) {
-    throw new Error(error.message)
+    throw error(error.message)
   }
 }
 
@@ -20,7 +20,7 @@ const check = {
     console.log(decoded);
 
     if (decoded.id !== owner) {
-      throw new Error('Forbidden');
+      throw error('Forbidden', 401);
     }
   },
 }
@@ -28,11 +28,11 @@ const check = {
 function getToken(auth) {
   // Bearer saqwasdasuasudiasduasdasd
   if (!auth) {
-    throw new Error('Token is missing');
+    throw error('Token is missing', 400);
   }
 
   if (auth.indexOf('Bearer ') === -1) {
-    throw new Error('Invalid Format')
+    throw error('Invalid Format', 400);
   }
 
   const token = auth.replace('Bearer ', '');
