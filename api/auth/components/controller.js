@@ -1,6 +1,8 @@
+const bcrypt = require('bcrypt');
 const { sign } = require('./../../../auth');
 
 const TABLE = 'auth';
+const config = require('./../../../config');
 
 module.exports = function (injectedStore) {
   let store = injectedStore;
@@ -20,7 +22,7 @@ module.exports = function (injectedStore) {
     return sign(data);
   }
 
-  function upsert(data) {
+  async function upsert(data) {
     const authData = {
       id: data.id,
     }
@@ -30,7 +32,7 @@ module.exports = function (injectedStore) {
     }
 
     if (data.password) {
-      authData.password = data.password;
+      authData.password = await bcrypt.hash(data.password, config.security.salt);
     }
 
     return store.upsert(TABLE, authData);

@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 
+const config = require('../config');
+
 function sign(data) {
-  return jwt.sign(data, 'my-secret-example-gustavo');
+  return jwt.sign(data, config.security.secret);
 }
 
 module.exports = {
