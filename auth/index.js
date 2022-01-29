@@ -7,13 +7,21 @@ function sign(data) {
 }
 
 function verify(token) {
-  return jwt.verify(token, config.security.secret);
+  try {
+    return jwt.verify(token, config.security.secret);
+  } catch (error) {
+    throw new Error(error.message)
+  }
 }
 
 const check = {
   own: function(req, owner) {
     const decoded = decodeHeader(req);
     console.log(decoded);
+
+    if (decoded.id !== owner) {
+      throw new Error('Forbidden');
+    }
   },
 }
 
