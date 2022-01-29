@@ -1,14 +1,14 @@
 const bcrypt = require('bcrypt');
-const { sign } = require('./../../../auth');
+const { sign } = require('../../../auth');
 
 const TABLE = 'auth';
-const config = require('./../../../config');
+const config = require('../../../config');
 
 module.exports = function (injectedStore) {
   let store = injectedStore;
 
   if (!store) {
-    store = require('./../../../store/dummy');
+    store = require('../../../store/dummy');
   }
 
   async function login(username, password) {
