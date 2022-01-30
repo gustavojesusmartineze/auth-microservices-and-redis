@@ -38,7 +38,7 @@ async function get(req, res, next) {
 async function create(req, res, next) {
   try {
     const body  = req.body;
-    const user = await controller.upsert(body);
+    const user = await controller.create(body);
 
     response.success(req, res, user, 201);
   } catch (error) {
@@ -49,7 +49,7 @@ async function create(req, res, next) {
 async function update(req, res, next) {
   try {
     const body  = req.body;
-    const user = await controller.upsert(body);
+    const user = await controller.update(body);
 
     response.success(req, res, user, 200);
   } catch (error) {

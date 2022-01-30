@@ -18,7 +18,25 @@ module.exports = function (injectedStore) {
     return store.get(TABLE, id);
   }
 
-  async function upsert(body) {
+  async function create(body) {
+    const user = {
+      id: nanoid(),
+      name: body.name,
+      username: body.username,
+    }
+
+    if (body.password || body.username) {
+      await auth.create({
+        id: user.id,
+        username: body.username,
+        password: body.password,
+      })
+    }
+
+    return store.insert(TABLE, user);
+  }
+
+  async function update(body) {
     const user = {
       name: body.name,
       username: body.username,
@@ -31,19 +49,20 @@ module.exports = function (injectedStore) {
     }
 
     if (body.password || body.username) {
-      await auth.upsert({
+      await auth.update({
         id: user.id,
         username: body.username,
         password: body.password,
       })
     }
 
-    return store.upsert(TABLE, user);
+    return store.update(TABLE, user);
   }
 
   return {
     list,
     get,
-    upsert
+    create,
+    update
   }
 }
