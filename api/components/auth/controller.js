@@ -50,7 +50,7 @@ module.exports = function (injectedStore) {
       authData.password = await bcrypt.hash(data.password, config.security.salt);
     }
 
-    return store.upsert(TABLE, authData);
+    return store.update(TABLE, authData);
   }
 
   return {
