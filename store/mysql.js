@@ -49,6 +49,19 @@ function list(table) {
   })
 }
 
+function get(table, id) {
+  return new Promise((resolve, reject) => {
+    connection.query(`SELECT * FROM ${table} WHERE id='${id}'`, (err, data) => {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(data);
+    });
+  })
+}
+
 module.exports = {
   list,
+  get,
 }
