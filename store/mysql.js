@@ -85,9 +85,26 @@ function update(table, data) {
   })
 }
 
+function query(table, query) {
+  return new Promise((resolve, reject) => {
+    connection.query(`SELECT * FROM ${table} WHERE ?`, query, (err, result) => {
+      if (err) {
+        return reject(err);
+      }
+
+      const data = result[0] ? {
+        ...result[0]
+      } : null;
+
+      resolve(data);
+    });
+  });
+}
+
 module.exports = {
   list,
   get,
   insert,
-  update
+  update,
+  query
 }
