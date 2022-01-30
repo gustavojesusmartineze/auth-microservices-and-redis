@@ -1,6 +1,6 @@
 const express = require('express');
 
-const response = require('../../../../network/response');
+const response = require('./../../../network/response');
 const controller = require('./index');
 
 const router = express.Router();
@@ -14,7 +14,7 @@ async function login(req, res, next) {
 
     response.success(req, res, data, 200)
   } catch (error) {
-    next();
+    next(error, req, res);
   }
 }
 

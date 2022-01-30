@@ -20,7 +20,7 @@ async function list (req, res, next) {
     const data = await controller.list();
     response.success(req, res, data, 200);
   } catch (error) {
-    next();
+    next(error, req, res);
   }
 }
 
@@ -31,18 +31,18 @@ async function get(req, res, next) {
 
     response.success(req, res, user, 200);
   } catch (error) {
-    next();
+    next(error, req, res);
   }
 }
 
 async function create(req, res, next) {
-    try {
+  try {
     const body  = req.body;
     const user = await controller.upsert(body);
 
-    response.success(req, res, user, 200);
+    response.success(req, res, user, 201);
   } catch (error) {
-    next();
+    next(error, req, res);
   }
 }
 
@@ -53,7 +53,7 @@ async function update(req, res, next) {
 
     response.success(req, res, user, 200);
   } catch (error) {
-    next();
+    next(error, req, res);
   }
 }
 
