@@ -61,7 +61,33 @@ function get(table, id) {
   })
 }
 
+function insert(table, data) {
+  return new Promise((resolve, reject) => {
+    connection.query(`INSERT INTO ${table} SET ?`, data, (err, result) => {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(result);
+    });
+  })
+}
+
+function update(table, data) {
+  return new Promise((resolve, reject) => {
+    connection.query(`UPDATE ${table} SET ? WHERE id=?`, [data, data.id], (err, result) => {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(result);
+    });
+  })
+}
+
 module.exports = {
   list,
   get,
+  insert,
+  update
 }
