@@ -14,7 +14,12 @@ module.exports = function (injectedStore) {
     return store.list(TABLE_POST);
   }
 
+  function get(id) {
+    return store.get(TABLE_USER, id);
+  }
+
   return {
     list,
+    get,
   }
 };
