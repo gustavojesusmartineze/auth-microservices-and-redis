@@ -23,6 +23,10 @@ const check = {
       throw error('Forbidden', 401);
     }
   },
+  logged: function(req) {
+    const decoded = decodeHeader(req);
+    console.log(decoded);
+  }
 }
 
 function getToken(auth) {
