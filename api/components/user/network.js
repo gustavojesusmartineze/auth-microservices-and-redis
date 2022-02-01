@@ -8,6 +8,10 @@ const router = express.Router();
 
 // Routes
 router.get('/', list);
+router.post('/follow/:id',
+  secure('follow'),
+  follow
+);
 router.get('/:id', get);
 router.post('/', create);
 router.put('/:id',
@@ -52,6 +56,18 @@ async function update(req, res, next) {
     const user = await controller.update(body);
 
     response.success(req, res, user, 200);
+  } catch (error) {
+    next(error, req, res);
+  }
+}
+
+async function follow(req, res, next) {
+  try {
+    const user_to = req.params.id;
+    const user_from = req.user.id;
+    const result = await controller.follow(user_from, user_to);
+
+    response.success(req, res, result, 201);
   } catch (error) {
     next(error, req, res);
   }
