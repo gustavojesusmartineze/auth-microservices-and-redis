@@ -12,6 +12,7 @@ router.post('/follow/:id',
   secure('follow'),
   follow
 );
+router.get('/:id/following', following);
 router.get('/:id', get);
 router.post('/', create);
 router.put('/:id',
@@ -71,6 +72,14 @@ async function follow(req, res, next) {
   } catch (error) {
     next(error, req, res);
   }
+}
+
+function following(req, res, next) {
+	return controller.following(req.params.id)
+		.then( (data) => {
+			return response.success(req, res, data, 200);
+		})
+		.catch(next);
 }
 
 module.exports = router;
