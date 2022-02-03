@@ -14,5 +14,8 @@ module.exports = {
       password: process.env.MYSQL_PASSWORD || 'mysqllocalnew',
       database: process.env.MYSQL_DATABASE || 'socialapp'
     }
+  },
+  mysqlService: {
+    port: process.env.MYSQL_SERVICE_PORT || 3001,
   }
 }
