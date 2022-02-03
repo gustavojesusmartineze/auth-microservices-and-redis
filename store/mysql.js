@@ -32,7 +32,7 @@ function handleConnection() {
     } else {
       throw err;
     }
-  })
+  });
 }
 
 handleConnection();
@@ -88,9 +88,9 @@ function update(table, data) {
 function query(table, query, join) {
   let joinQuery = '';
   if (join) {
-      const key = Object.keys(join)[0];
-      const val = join[key];
-      joinQuery = `JOIN ${key} ON ${table}.${val} = ${key}.id`;
+    const key = Object.keys(join)[0];
+    const val = join[key];
+    joinQuery = `JOIN ${key} ON ${table}.${val} = ${key}.id`;
   }
 
   return new Promise((resolve, reject) => {
@@ -108,10 +108,23 @@ function query(table, query, join) {
   });
 }
 
+function remove(table, id) {
+  return new Promise((resolve, reject) => {
+    connection.query(`REMOVE FROM ${table} WHERE id=?`, id, (err, result) => {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(result);
+    });
+  });
+}
+
 module.exports = {
   list,
   get,
   insert,
   update,
-  query
+  query,
+  remove
 }
