@@ -16,7 +16,7 @@ module.exports = {
     }
   },
   mysqlService: {
-    port: process.env.MYSQL_SERVICE_HOST || 'localhost',
+    host: process.env.MYSQL_SERVICE_HOST || 'http://localhost',
     port: process.env.MYSQL_SERVICE_PORT || 3001,
   }
 }

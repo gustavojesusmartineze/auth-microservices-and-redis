@@ -21,7 +21,7 @@ function createRemoteDB(host, port) {
     return new Promise((resolve, reject) => {
       axios(config)
         .then((response) => {
-          resolve(response.data.response);
+          resolve(response.data.body);
         })
         .catch((error) => {
           console.log('Error with the remote database', error)
