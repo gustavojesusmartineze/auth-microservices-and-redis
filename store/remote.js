@@ -13,18 +13,15 @@ function createRemoteDB(host, port) {
 
   function handleRequest(method, table, data) {
     let url = URL + '/' + table;
-    let body = '';
 
-    if (method === HTTP_METHODS.GET && data) {
+    if (data && (method === HTTP_METHODS.GET || method === HTTP_METHODS.DELETE)) {
       url += '/'+ data;
-    } else if (data) {
-      body = JSON.stringify(data);
     }
 
     const config = {
       method,
       url: url,
-      data: body || null,
+      data: data || null,
     };
 
     return new Promise((resolve, reject) => {
@@ -50,20 +47,19 @@ function createRemoteDB(host, port) {
   }
 
   function insert(table, data) {
-
+    return handleRequest(HTTP_METHODS.POST, table, data);
   }
 
   function update(table, data) {
-
+    return handleRequest(HTTP_METHODS.PUT, table, data);
   }
 
-  function remove(table, data) {
-
+  function remove(table, id) {
+    return handleRequest(HTTP_METHODS.DELETE, table, id);
   }
-
 
   function query(table, data, join) {
-
+    return handleRequest(HTTP_METHODS.POST, table + '/query', { query, join });
   }
 
   return {
@@ -71,6 +67,7 @@ function createRemoteDB(host, port) {
     get,
     insert,
     update,
+    remove,
     query
   }
 }
