@@ -22,7 +22,7 @@ async function list(req, res, next) {
 
 async function get(req, res, next) {
   try {
-    const data = await Store.get(req.params.table, res.params.id);
+    const data = await Store.get(req.params.table, req.params.id);
 
     response.success(req, res, data, 200);
   } catch (error) {
