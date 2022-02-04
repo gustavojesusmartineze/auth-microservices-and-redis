@@ -1,18 +1,19 @@
 const express = require('express');
 
 const response = require('./../../../network/response');
-const controller = require('./index');
+const auth = require('./secure');
+const Controller = require('./index');
 
 const router = express.Router();
 
 // Routes
 router.get('/', list);
 router.get('/:id', get);
-router.post('/:id', auth('add'), create);
+router.post('/', auth('add'), create);
 
 async function list (req, res, next) {
   try {
-    const data = await controller.list();
+    const data = await Controller.list();
     response.success(req, res, data, 200);
   } catch (error) {
     next(error, req, res);
@@ -22,7 +23,7 @@ async function list (req, res, next) {
 async function get(req, res, next) {
     try {
     const { id } = req.params;
-    const user = await controller.get(id);
+    const user = await Controller.get(id);
 
     response.success(req, res, user, 200);
   } catch (error) {
@@ -33,9 +34,9 @@ async function get(req, res, next) {
 async function create(req, res, next) {
   try {
     const body  = req.body;
-    const user = await controller.create(body);
+    const post = await Controller.create(body, req.user.id);
 
-    response.success(req, res, user, 201);
+    response.success(req, res, post, 201);
   } catch (error) {
     next(error, req, res);
   }

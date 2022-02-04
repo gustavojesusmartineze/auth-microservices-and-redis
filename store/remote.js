@@ -58,7 +58,7 @@ function createRemoteDB(host, port) {
     return handleRequest(HTTP_METHODS.DELETE, table, id);
   }
 
-  function query(table, data, join) {
+  function query(table, query, join) {
     return handleRequest(HTTP_METHODS.POST, table + '/query', { query, join });
   }
 

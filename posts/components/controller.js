@@ -1,4 +1,4 @@
-const nanoid = require('nanoid');
+const { nanoid } = require('nanoid');
 const error = require('../../../utils/error');
 
 const COLLECTION = 'post';
@@ -26,12 +26,12 @@ module.exports = function (injectedStore) {
   async function create(data, user) {
     const post = {
       id: nanoid(),
-			user: user,
 			title: data.title,
 			text: data.text,
+			author: user,
     }
 
-    return Store.insert(COLLECTION, post);
+    return await Store.insert(COLLECTION, post);
   }
 
   return {

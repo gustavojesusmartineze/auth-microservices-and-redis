@@ -21,7 +21,7 @@ module.exports = function (injectedStore) {
     }
 
     // Generate Token
-    return sign(data);
+    return sign({ ...data });
   }
 
   async function create(data) {
