@@ -1,0 +1,42 @@
+const nanoid = require('nanoid');
+const error = require('../../../utils/error');
+
+const COLLECTION = 'post';
+
+module.exports = function (injectedStore) {
+  let Store = injectedStore;
+
+  if (!Store) {
+    Store = require('../../../store/dummy');
+  }
+
+  function list() {
+    return Store.list(COLLECTION);
+  }
+
+  async function get(id) {
+    const post = await Store.get(COLLECTION, id);
+    if (!post) {
+      throw error('Post not found', 404);
+    }
+
+    return post;
+  }
+
+  async function create(data, user) {
+    const post = {
+      id: nanoid(),
+			user: user,
+			title: data.title,
+			text: data.text,
+    }
+
+    return Store.insert(COLLECTION, post);
+  }
+
+  return {
+    list,
+    get,
+    create
+  }
+};
