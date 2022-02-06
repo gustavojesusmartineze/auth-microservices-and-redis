@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    env_file:
+      - .env
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql_data:/var/lib/mysqlql/data
+
+  redis:
+    container_name: redis
+    command:
+      --requirepass ${REDIS_PASSWORD}
+    image: redis:6.2
+    env_file:
+      - .env
+    ports:
+    - 6379:6379
+    volumes:
+      - './redis_data:/var/lib/redis/data'
