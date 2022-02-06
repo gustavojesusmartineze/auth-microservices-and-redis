@@ -11,11 +11,13 @@ const HTTP_METHODS = {
 function createRemoteDB(host, port) {
   const URL = `${host}:${port}`;
 
-  function handleRequest(method, table, data) {
+  function handleRequest(method, table, data, id) {
     let url = URL + '/' + table;
 
     if (data && (method === HTTP_METHODS.GET || method === HTTP_METHODS.DELETE)) {
       url += '/'+ data;
+    } else if (id && (method === HTTP_METHODS.PUT || method === HTTP_METHODS.PATCH)) {
+      url += '/'+ id;
     }
 
     const config = {
@@ -50,8 +52,8 @@ function createRemoteDB(host, port) {
     return handleRequest(HTTP_METHODS.POST, table, data);
   }
 
-  function update(table, data) {
-    return handleRequest(HTTP_METHODS.PUT, table, data);
+  function update(table, data, id) {
+    return handleRequest(HTTP_METHODS.PUT, table, data, id);
   }
 
   function remove(table, id) {

@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/:table', list);
 router.get('/:table/:id', get);
 router.post('/:table', insert);
-router.put('/:table', update);
+router.put('/:table/:id', update);
 router.post('/:table/query', query);
 router.delete('/:table/:id', remove);
 
@@ -44,7 +44,7 @@ async function insert(req, res, next) {
 
 async function update(req, res, next) {
   try {
-    const data = await Store.update(req.params.table, req.body);
+    const data = await Store.update(req.params.table, req.body, req.params.id);
 
     response.success(req, res, data, 200);
   } catch (error) {
