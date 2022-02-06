@@ -1,3 +1,8 @@
+require('dotenv').config();
+
+// If you want to check for missing values
+// console.log(process.env);
+
 module.exports = {
   api: {
     port: process.env.API_PORT || 3000,
@@ -26,4 +31,9 @@ module.exports = {
     host: process.env.CACHE_SERVICE_HOST || 'http://localhost',
     port: process.env.CACHE_SERVICE_PORT || 3003,
   },
+  redis: {
+    host: process.env.REDIS_HOST || 'http://localhost',
+    port: process.env.REDIS_PORT || 7000,
+    password: process.env.REDIS_PASSWORD || 'password123',
+  }
 }
