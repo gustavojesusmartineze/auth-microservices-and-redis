@@ -33,7 +33,8 @@ module.exports = {
   },
   redis: {
     host: process.env.REDIS_HOST || 'http://localhost',
-    port: process.env.REDIS_PORT || 7000,
+    port: process.env.REDIS_PORT || 6379,
+    user: process.env.REDIS_USER || 'default',
     password: process.env.REDIS_PASSWORD || 'password123',
   }
 }
