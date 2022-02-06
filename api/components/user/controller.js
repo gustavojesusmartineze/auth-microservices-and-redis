@@ -37,27 +37,21 @@ module.exports = function (injectedStore) {
     return store.insert(TABLE_USER, user);
   }
 
-  async function update(body) {
+  async function update(id, body) {
     const user = {
       name: body.name,
       username: body.username,
     }
 
-    if (body.id) {
-      user.id = body.id;
-    } else {
-      user.id = nanoid();
-    }
-
     if (body.password || body.username) {
       await auth.update({
-        id: user.id,
+        id: id,
         username: body.username,
         password: body.password,
       })
     }
 
-    return store.update(TABLE_USER, user);
+    return store.update(TABLE_USER, user, id);
   }
 
   function follow(from, to) {

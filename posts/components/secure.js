@@ -11,8 +11,8 @@ function checkAuth(action, options) {
         break;
 
       case 'update':
-        const post = await Controller.get(req.body.id);
-        auth.check.own(req, post.user);
+        const post = await Controller.get(req.params.id);
+        auth.check.own(req, post.author);
         next()
         break;
 

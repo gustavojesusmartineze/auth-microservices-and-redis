@@ -56,7 +56,7 @@ function get(table, id) {
         return reject(err);
       }
 
-      resolve(data);
+      resolve(data[0]);
     });
   })
 }

@@ -54,7 +54,9 @@ async function create(req, res, next) {
 async function update(req, res, next) {
   try {
     const body  = req.body;
-    const user = await controller.update(body);
+    const id = req.params.id;
+
+    const user = await controller.update(id, body);
 
     response.success(req, res, user, 200);
   } catch (error) {
