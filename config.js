@@ -21,5 +21,9 @@ module.exports = {
   },
   post: {
     port: process.env.POST_SERVICE_PORT || 3002,
-  }
+  },
+  cacheService: {
+    host: process.env.CACHE_SERVICE_HOST || 'http://localhost',
+    port: process.env.CACHE_SERVICE_PORT || 3003,
+  },
 }
