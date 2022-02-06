@@ -29,7 +29,8 @@ module.exports = {
   },
   cacheService: {
     host: process.env.CACHE_SERVICE_HOST || 'http://localhost',
-    port: process.env.CACHE_SERVICE_PORT || 3003,
+    port: process.env.CACHE_SERVICE_PORT || 3004,
+    ttl: process.env.CACHE_SERVICE_TTL || 60,
   },
   redis: {
     host: process.env.REDIS_HOST || 'http://localhost',

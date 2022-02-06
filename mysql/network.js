@@ -18,7 +18,7 @@ async function list(req, res, next) {
 
     response.success(req, res, data, 200);
   } catch (error) {
-    next(error, req, res)
+    next(error, req, res);
   }
 }
 
@@ -28,7 +28,7 @@ async function get(req, res, next) {
 
     response.success(req, res, data, 200);
   } catch (error) {
-    next(error, req, res)
+    next(error, req, res);
   }
 }
 
@@ -38,7 +38,7 @@ async function insert(req, res, next) {
 
     response.success(req, res, data, 201);
   } catch (error) {
-    next(error, req, res)
+    next(error, req, res);
   }
 }
 
@@ -48,7 +48,7 @@ async function update(req, res, next) {
 
     response.success(req, res, data, 200);
   } catch (error) {
-    next(error, req, res)
+    next(error, req, res);
   }
 }
 
@@ -58,7 +58,7 @@ async function query(req, res, next) {
 
     response.success(req, res, data, 200);
   } catch (error) {
-    next(error, req, res)
+    next(error, req, res);
   }
 }
 
@@ -68,7 +68,7 @@ async function remove(req, res, next) {
 
     response.success(req, res, data, 200);
   } catch (error) {
-    next(error, req, res)
+    next(error, req, res);
   }
 }
 
