@@ -34,9 +34,20 @@ module.exports = function (injectedStore) {
     return await Store.insert(COLLECTION, post);
   }
 
+  async function update(id, data) {
+    const post = {
+			title: data.title,
+			text: data.text,
+			author: data.author,
+    }
+
+    return await Store.update(COLLECTION, post, id);
+  }
+
   return {
     list,
     get,
-    create
+    create,
+    update
   }
 };

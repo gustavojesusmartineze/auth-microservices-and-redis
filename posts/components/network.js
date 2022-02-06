@@ -10,6 +10,7 @@ const router = express.Router();
 router.get('/', list);
 router.get('/:id', get);
 router.post('/', auth('add'), create);
+router.put('/:id', auth('update', { owner: 'user' }), update);
 
 async function list (req, res, next) {
   try {
@@ -35,6 +36,18 @@ async function create(req, res, next) {
   try {
     const body  = req.body;
     const post = await Controller.create(body, req.user.id);
+
+    response.success(req, res, post, 201);
+  } catch (error) {
+    next(error, req, res);
+  }
+}
+
+async function update(req, res, next) {
+  try {
+    const body  = req.body;
+    body.author = req.user.id;
+    const post = await Controller.update(req.params.id, body);
 
     response.success(req, res, post, 201);
   } catch (error) {
