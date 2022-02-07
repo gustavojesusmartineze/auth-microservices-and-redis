@@ -1,0 +1,18 @@
+# By default: Ignore everything
+**
+
+# Allow only these files and directories
+!config.js
+!ecosystem.config.js
+!package.json
+!package-lock.json
+!api/**
+!auth/**
+!cache/**
+!mysql/**
+!network/**
+!posts/**
+!store/**
+!utils/**
+!config.js
+!.env
