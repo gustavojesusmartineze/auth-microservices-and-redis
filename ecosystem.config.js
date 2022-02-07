@@ -1,10 +1,12 @@
 module.exports = {
-  apps : [{
+  apps : [
+    {
       name: 'api-service',
       script: 'api/index.js',
       instances: 1,
       autorestart: true,
       watch: false,
+      out_file: "/tmp/api-service.log",
       max_memory_restart: '2G',
       env: {
         NODE_ENV: 'development'
@@ -19,6 +21,7 @@ module.exports = {
       instances: 1,
       autorestart: true,
       watch: false,
+      out_file: "/tmp/mysql-service.log",
       max_memory_restart: '2G',
       env: {
         NODE_ENV: 'development'
@@ -33,6 +36,7 @@ module.exports = {
       instances: 1,
       autorestart: true,
       watch: false,
+      out_file: "/tmp/cache-service.log",
       max_memory_restart: '2G',
       env: {
         NODE_ENV: 'development'
@@ -47,6 +51,7 @@ module.exports = {
       instances: 1,
       autorestart: true,
       watch: false,
+      out_file: "/tmp/post-service.log",
       max_memory_restart: '2G',
       env: {
         NODE_ENV: 'development'
@@ -55,17 +60,5 @@ module.exports = {
         NODE_ENV: 'production'
       }
     }
-  ],
-  deploy : {
-    production : {
-      user : 'SSH_USERNAME',
-      host : 'SSH_HOSTMACHINE',
-      ref  : 'origin/master',
-      repo : 'GIT_REPOSITORY',
-      path : 'DESTINATION_PATH',
-      'pre-deploy-local': '',
-      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production',
-      'pre-setup': ''
-    }
-  }
+  ]
 };
