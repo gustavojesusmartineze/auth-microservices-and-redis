@@ -30,7 +30,18 @@ module.exports = function (injectedStore, injectedCache) {
     return users;
   }
 
-  function get(id) {
+  async function get(id) {
+    const url = `${TABLE_USER}_${id}`;
+    let user = await cache.list(url);
+
+    if (!user) {
+      user = await store.get(TABLE_USER, id);
+      cache.upsert(TABLE_USER, user);
+      console.log(`${url} was not in cache, getting data from DB`);
+    } else {
+      console.log('Getting data from cache');
+    }
+
     return store.get(TABLE_USER, id);
   }
 
