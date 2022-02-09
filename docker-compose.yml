@@ -43,6 +43,29 @@ services:
     networks:
       - app-network
 
+  # Retrieves core services
+  core-services:
+    container_name: core-services
+    image: core-services
+    env_file:
+      - .env
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    depends_on:
+      - mysql
+      - redis
+    ports:
+      - 3000:3000
+      - 3001:3001
+      - 3002:3002
+      - 3003:3003
+    volumes:
+      - .:/app
+    restart: unless-stopped
+    networks:
+      - app-network
+
 #Docker Networks
 networks:
   app-network:
