@@ -70,3 +70,13 @@ JSON DATA
 	"password": "notasafepassword"
 }
 ```
+
+### Post
+**List:**
+```
+GET http://localhost/api/post
+```
+**Show:**
+```
+GET http://localhost/api/post/{id}
+```
