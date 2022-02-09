@@ -1,6 +1,21 @@
 version: '3.3'
 
 services:
+  # Proxies requests to internal services
+  reverse-proxy:
+    container_name: reverse-proxy
+    image: nginx:1.17.10
+    depends_on:
+        - mysql
+        - redis
+        - core-services
+    volumes:
+      - ./reverse-proxy/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+    networks:
+      - app-network
+
   mysql:
     container_name: mysql
     image: mysql:8.0
@@ -11,6 +26,8 @@ services:
       - 3306:3306
     volumes:
       - ./mysql_data:/var/lib/mysqlql/data
+    networks:
+      - app-network
 
   redis:
     container_name: redis
@@ -23,3 +40,10 @@ services:
     - 6379:6379
     volumes:
       - './redis_data:/var/lib/redis/data'
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
